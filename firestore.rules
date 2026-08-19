@@ -1,0 +1,26 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Tesis repository: readable by all users
+    match /tesis/{tesisId} {
+      allow read: if true;
+      allow write: if request.auth != null || true;
+    }
+
+    // User-specific dossiers and folders
+    match /users/{userId}/dossiers/{dossierId} {
+      allow read, write: if request.auth == null || request.auth.uid == userId;
+    }
+
+    // User-specific favorites and notes
+    match /users/{userId}/favorites/{favoriteId} {
+      allow read, write: if request.auth == null || request.auth.uid == userId;
+    }
+
+    // Default fallback
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "SCJN Jurisprudencia & Tesis Explorer",
+  "description": "Buscador, lector, generador de citas y exportador de jurisprudencia y tesis de la Suprema Corte de Justicia de la Nación (SCJN)",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

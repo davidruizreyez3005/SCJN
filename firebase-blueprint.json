@@ -1,0 +1,72 @@
+{
+  "entities": {
+    "TesisRecord": {
+      "title": "TesisRecord",
+      "description": "Criterio jurisprudencial o tesis aislada de la Suprema Corte de Justicia de la Nación.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Registro digital o clave única" },
+        "registroDigital": { "type": "string" },
+        "ius": { "type": "string" },
+        "rubro": { "type": "string" },
+        "texto": { "type": "string" },
+        "precedentes": { "type": "string" },
+        "epoca": { "type": "string" },
+        "instancia": { "type": "string" },
+        "organoJurisdiccional": { "type": "string" },
+        "tipoTesis": { "type": "string" },
+        "materia": { "type": "string" },
+        "materias": { "type": "array" },
+        "fuente": { "type": "string" },
+        "localizacion": { "type": "string" },
+        "clave": { "type": "string" },
+        "fechaPublicacion": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "rubro", "texto"]
+    },
+    "UserDossier": {
+      "title": "UserDossier",
+      "description": "Expediente de estudio y selección de tesis guardado en la nube.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "userId": { "type": "string" },
+        "tesisIds": { "type": "array" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "title", "userId"]
+    },
+    "UserFavorite": {
+      "title": "UserFavorite",
+      "description": "Criterios marcados como favoritos por el usuario con notas personalizadas.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "tesisId": { "type": "string" },
+        "rubro": { "type": "string" },
+        "personalNotes": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "tesisId"]
+    }
+  },
+  "firestore": {
+    "/tesis/{tesisId}": {
+      "schema": "TesisRecord",
+      "description": "Repositorio global en la nube de jurisprudencias y tesis de la SCJN."
+    },
+    "/users/{userId}/dossiers/{dossierId}": {
+      "schema": "UserDossier",
+      "description": "Expedientes de litigio y compendios creados por cada usuario."
+    },
+    "/users/{userId}/favorites/{favoriteId}": {
+      "schema": "UserFavorite",
+      "description": "Criterios destacados y notas personales sincronizadas en la nube."
+    }
+  }
+}
